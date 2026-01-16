@@ -9,21 +9,25 @@ export class PimPage {
   readonly saveButton: Locator;
   readonly newEmployeeNameHeading: Locator;
 
-  PimPage(page: Page) {
+  constructor(page: Page) {
     this.page = page;
     this.addPimButton = page.getByRole("button", { name: "Add" });
     this.firstNameTextBox = page.getByRole("textbox", { name: "First Name" });
     this.middleNameTextBox = page.getByRole("textbox", { name: "Middle Name" });
     this.lastNameTextBox = page.getByRole("textbox", { name: "Last Name" });
     this.saveButton = page.getByRole("button", { name: "Save" });
-    this.newEmployeeNameHeading = page.locator(".orangehrmedit-employee-name");
+    this.newEmployeeNameHeading = page.locator(".orangehrm-edit-employee-name");
   }
 
-  addEmployee(first_name: String, last_name: string, middle_name: string) {
+  async addEmployee(
+    firstName: string,
+    lastName: string,
+    middleName: string
+  ): Promise<void> {
     await this.addPimButton.click();
-    await this.firstNameTextBox.fill(first_name);
-    await this.lastNameTextBox.fill(last_name);
-    await this.middleNameTextBox.fill(middle_name);
+    await this.firstNameTextBox.fill(firstName);
+    await this.middleNameTextBox.fill(middleName);
+    await this.lastNameTextBox.fill(lastName);
     await this.saveButton.click();
   }
 }

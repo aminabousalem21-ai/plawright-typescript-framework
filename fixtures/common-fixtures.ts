@@ -1,12 +1,23 @@
-import CommonUtils from "../utils/CommonUtils";
-import { test as baseTest } from "./pom-fixture";
+import CryptoJS from "crypto-js";
 
-type CommonFixturesType = {
-  commonUtils: CommonUtils;
-};
+export default class CommonUtils {
+  private secretKey: string;
 
-export const test = baseTest.extend<CommonFixturesType>({
-  commonUtils: async ({}, use) => {
-    await use(new CommonUtils());
-  },
-});
+  constructor() {
+    const key = process.env.SECRET_KEY;
+    if (!key) {
+      throw new Error("Please provide secret key in environment variables");
+    }
+    this.secretKey = key;
+  }
+
+  public encryptData(data: string): string {
+    return CryptoJS.AES.encrypt(data, this.secretKey).toString();
+  }
+
+  public decryptData(encData: string): string {
+    return CryptoJS.AES.decrypt(encData, this.secretKey).toString(
+      CryptoJS.enc.Utf8
+    );
+  }
+}

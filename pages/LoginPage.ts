@@ -1,7 +1,7 @@
-import baseTest, { Locator, Page } from "@playwright/test";
-import { PomFixturesType } from "../fixtures/pom-fixture";
+import { Locator, Page, test as baseTest } from "@playwright/test";
+import { Fixtures } from "../fixtures/pom-fixture";
 import { DashboardPage } from "./DashboardPage";
-import { leftNavigationPage } from "./LeftNavigationsPage";
+import { LeftNavigationPage } from "./LeftNavigationsPage";
 import { PimPage } from "./PimPage";
 import { UserPage } from "./UserPage";
 
@@ -10,18 +10,18 @@ export class LoginPage {
   readonly usernameTextBox: Locator;
   readonly passwordTextBox: Locator;
   readonly loginButton: Locator;
-  readonly invelidcredentialsErrorPopup: Locator;
+  readonly invalidCredentialsErrorPopup: Locator;
 
   constructor(page: Page) {
     this.page = page;
     this.usernameTextBox = page.getByRole("textbox", { name: "Username" });
-    this.passwordTextBox = page.locator("id=password");
-    this.loginButton = page.locator("id=login-button");
-    this.invelidcredentialsErrorPopup = page.getByText("Invalid credentials");
+    this.passwordTextBox = page.locator("#password");
+    this.loginButton = page.locator("#login-button");
+    this.invalidCredentialsErrorPopup = page.getByText("Invalid credentials");
   }
 
   async gotoOrangeHrm() {
-    await this.page.goto("${process.env.BASE_URL}/web/index.php/auth/login");
+    await this.page.goto(`${process.env.BASE_URL}/web/index.php/auth/login`);
   }
 
   async loginOrangeHrm(usernameVal: string, passwordVal: string) {
@@ -30,10 +30,12 @@ export class LoginPage {
     await this.loginButton.click();
   }
 }
-export const test = baseTest.extend<PomFixturesType>({
+
+export const test = baseTest.extend<Fixtures>({
   loginPage: async ({ page }, use) => {
     await use(new LoginPage(page));
   },
+
   dashboardPage: async ({ page }, use) => {
     await use(new DashboardPage(page));
   },
@@ -47,6 +49,6 @@ export const test = baseTest.extend<PomFixturesType>({
   },
 
   leftNavigationPage: async ({ page }, use) => {
-    await use(new leftNavigationPage(page));
+    await use(new LeftNavigationPage(page));
   },
 });

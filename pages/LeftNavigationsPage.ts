@@ -1,6 +1,6 @@
 import { Page, Locator } from "@playwright/test";
 
-export class leftNavigationPagePage {
+export class LeftNavigationPage {
   readonly page: Page;
   readonly pimLink: Locator;
 

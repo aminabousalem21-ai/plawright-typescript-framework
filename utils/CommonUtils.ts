@@ -1,27 +1,23 @@
 import CryptoJS from "crypto-js";
 
+export default class CommonUtils {
+  private secretKey: string;
 
-export default class CommonUtils{
+  constructor() {
+    const key = process.env.SECRET_KEY;
+    if (!key) {
+      throw new Error("Please provide secret key in environment variables");
+    }
+    this.secretKey = key;
+  }
 
-private secretKey :string;
-constructor(){
-   if (process.env.SECRET_KEY){
+  public encryptData(data: string): string {
+    return CryptoJS.AES.encrypt(data, this.secretKey).toString();
+  }
 
-     this.secretKey= process.env.SECRET_KEY;
-
-   }
-
-   else{
-    throw new Error ("Please provide scret key ")
-   }
-
-}
-public  encryptData(data: string){
-    return CryptoJS.AES.encrypt(data,this.secretKey).toString();
-}
-
-public decryptData(encData: string){
-    return CryptoJS.AES.decrypt(encData, this.secretKey).toString(CryptoJS.enc.Utf8);
-}
-
+  public decryptData(encData: string): string {
+    return CryptoJS.AES.decrypt(encData, this.secretKey).toString(
+      CryptoJS.enc.Utf8
+    );
+  }
 }
