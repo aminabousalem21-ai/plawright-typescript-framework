@@ -4,6 +4,7 @@ import { DashboardPage } from "../pages/DashboardPage";
 import { UserPage } from "../pages/UserPage";
 import { PimPage } from "../pages/PimPage";
 import { LeftNavigationPage } from "../pages/LeftNavigationsPage";
+import { RecruitmentPage } from "../pages/RecruitmentPage";
 import CommonUtils from "../utils/CommonUtils";
 
 export type Fixtures = {
@@ -12,6 +13,7 @@ export type Fixtures = {
   userPage: UserPage;
   pimPage: PimPage;
   leftNavigationPage: LeftNavigationPage;
+  recruitmentPage: RecruitmentPage;
   commonUtils: CommonUtils;
 };
 
@@ -30,6 +32,9 @@ export const test = baseTest.extend<Fixtures>({
   },
   leftNavigationPage: async ({ page }, use) => {
     await use(new LeftNavigationPage(page));
+  },
+  recruitmentPage: async ({ page }, use) => {
+    await use(new RecruitmentPage(page));
   },
   commonUtils: async (_, use) => {
     await use(new CommonUtils());

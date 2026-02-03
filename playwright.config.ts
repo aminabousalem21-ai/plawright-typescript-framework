@@ -11,8 +11,9 @@ import dotenv from 'dotenv'
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
+const envName = process.env.ENV_NAME ?? 'demo'
 dotenv.config({
-  path: process.env.ENV_NAME ? './env-files/.env.${process.env.ENV_NAME}' : './env-files/.env.demo'
+  path: `./env-file/env.${envName}`,
 })
 export default defineConfig({
   testDir: './tests',
