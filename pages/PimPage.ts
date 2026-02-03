@@ -21,8 +21,8 @@ export class PimPage {
 
   async addEmployee(
     firstName: string,
-    lastName: string,
-    middleName: string
+    middleName: string,
+    lastName: string
   ): Promise<void> {
     await this.addPimButton.click();
     await this.firstNameTextBox.fill(firstName);

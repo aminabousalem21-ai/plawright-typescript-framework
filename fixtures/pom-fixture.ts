@@ -6,7 +6,7 @@ import { PimPage } from "../pages/PimPage";
 import { LeftNavigationPage } from "../pages/LeftNavigationsPage";
 import CommonUtils from "../utils/CommonUtils";
 
-type Fixtures = {
+export type Fixtures = {
   loginPage: LoginPage;
   dashboardPage: DashboardPage;
   userPage: UserPage;

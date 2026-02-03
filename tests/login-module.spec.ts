@@ -1,4 +1,4 @@
-import { test } from "../fixtures/common-fixtures";
+import { test } from "../fixtures/pom-fixture";
 import loginModuleData from "../data/login-module-data.json";
 import { expect } from "@playwright/test";
 
@@ -9,7 +9,7 @@ test("login verify user cannot log with invalid password", async ({
   const username = commonUtils.decryptData(process.env.USER_NAME as string);
 
   await loginPage.loginOrangeHrm(username, loginModuleData.wrong_password);
-  await expect(loginPage.invelidcredentialsErrorPopup).toHaveText(
+  await expect(loginPage.invalidCredentialsErrorPopup).toHaveText(
     loginModuleData.invalid_credentials
   );
 
@@ -24,7 +24,7 @@ test("login verify user cannot log with invalid username", async ({
     loginModuleData.wrong_username,
     commonUtils.decryptData(process.env.PASSWORD!)
   );
-  await expect(loginPage.invelidcredentialsErrorPopup).toHaveText(
+  await expect(loginPage.invalidCredentialsErrorPopup).toHaveText(
     loginModuleData.invalid_credentials
   );
   await expect(loginPage.usernameTextBox).toBeVisible();
@@ -38,7 +38,7 @@ test("login verify user cannot log with invalid username and password", async ({
     loginModuleData.wrong_username,
     loginModuleData.wrong_password
   );
-  await expect(loginPage.invelidcredentialsErrorPopup).toHaveText(
+  await expect(loginPage.invalidCredentialsErrorPopup).toHaveText(
     loginModuleData.invalid_credentials
   );
   await expect(loginPage.usernameTextBox).toBeVisible();

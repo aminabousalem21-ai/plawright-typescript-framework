@@ -1,5 +1,7 @@
 import { test } from "../fixtures/pom-fixture";
 
+export { test };
+
 test.beforeAll(async () => {
   console.log("⚡ Global setup: runs once before all tests");
 });

@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/common-fixtures";
+import { test } from "../fixtures/pom-fixture";
 
 test("Global setup for auto Login", async ({
   page,
@@ -11,6 +11,8 @@ test("Global setup for auto Login", async ({
   const decryptedPassword = commonUtils.decryptData(process.env.PASSWORD!);
   await loginPage.gotoOrangeHrm();
   await loginPage.loginOrangeHrm(decryptedUsername, decryptedPassword);
-  await page.waitForURL(process.env.BASE_URL + "/web/index.php/auth/login");
+  await page.waitForURL(
+    `${process.env.BASE_URL}/web/index.php/dashboard/index`
+  );
   await expect(dashboardPage.dashboardTitleText).toHaveText("Dashboard");
 });
